@@ -1,0 +1,80 @@
+﻿@model MyBanK.Models.ContaCorrente
+
+@{
+    ViewData["Title"] = "Movimentação de Conta";
+    var Valor = "Valor";
+    var Descricao = "Descricao";
+}
+
+<h1>Movimentação</h1>
+
+<div>
+    <h4>ContaCorrente (@Model.Id)</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Titular)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Titular)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataAbertura)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataAbertura)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+    </dl>
+</div>
+<form>
+    <input type="hidden" asp-for="Id" />
+    <input type="text" asp-for="@Descricao" />
+    <input type="number" asp-for="@Valor"/>
+    <input type="submit" asp-action="Saque" class="btn btn-danger" value="Saque"/> |
+    <input type="submit" asp-action="Deposito" class="btn btn-primary" value="Depósito"/> |
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimentos.First().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimentos.First().Descr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimentos.First().Ocorrencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movimentos.First().Valor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Movimentos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ocorrencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
